@@ -1,5 +1,9 @@
 # zsh-config
 
+![shell session screenshot](https://cloud.githubusercontent.com/assets/8616618/7666843/a02c2682-fbc1-11e4-9a91-a7adfbec27d4.png)
+YMMV depending on your terminal and theme.
+I'm using iTerm2 with the ToyChest theme.
+
 Hello World! The purpose of this repo is two-fold:
 1. backup my configuration files for oh-my-zsh
 1. share my files to inspire someone else who wants the same thing
