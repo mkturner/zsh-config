@@ -64,8 +64,7 @@ export PATH
 #export PATH="/Users/marvin/anaconda/bin:$PATH"
 
 #Postgres addition
-#export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin/psql:$PATH"
-export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 
 #Android SDK location
 export PATH="/Users/marvin/Library/Android/SDK/platform-tools:$PATH"
@@ -99,7 +98,7 @@ export EDITOR='subl -w'
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="subl ~/.zshrc"
+# alias zshconfig="subl ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gst='git status'
 alias ga='git add'
@@ -125,10 +124,14 @@ alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall 
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias empty='rm -rf .Trash/*'
 alias fuck='$(thefuck $(fc -ln -1))'
+alias bye='exit'
+
+# python /django stuff
 alias py='python'
 alias py3='python3'
 
 alias djangover='python -c "from __future__ import print_function; import django; print(django.get_version())"'
+alias pyman='./manage.py'
 
 function mkcd () {
 	mkdir "$1" && cd "$1"
@@ -151,6 +154,13 @@ function activate() {
     pyenv activate $1
 }
 
+function zshconfig() {
+    zshrc=~/.zshrc
+
+    subl -w $zshrc
+    source $zshrc
+}
+
 
 #unalias run-help
 #autoload run-help
@@ -161,7 +171,13 @@ export PATH=/usr/local/bin:$PATH
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# put pyenv shims directory before /usr/local/bin
+export PYENV_ROOT=~/.pyenv
+export PATH=$PYENV_ROOT/shims:$PATH
+# Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin"
+# Add NVM "                  "
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh # Add NVM "					 "
+source $(brew --prefix nvm)/nvm.sh
+export VIRTUAL_ENV_DISABLE_PROMPT='1'
 

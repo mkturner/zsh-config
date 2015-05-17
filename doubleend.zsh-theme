@@ -58,17 +58,21 @@ function put_spacing() {
 
 function virtualenv_info() {
  if [ $VIRTUAL_ENV ]; then
-   echo '('`basename $VIRTUAL_ENV`') '
+   echo `basename $VIRTUAL_ENV`$fg[yellow]': '
  else
    echo ''
  fi
+}
+
+function python_info() {
+  echo `python -c "import sys; print(sys.version[:5])"`' '
 }
 
 
 
 PROMPT='
 $fg[cyan]$(get_host): $fg[yellow]$(get_pwd) %{$reset_color%}|| $(git_prompt_info) || $(battery_charge)
-$fg[blue]$(virtualenv_info)%{$reset_color%}→ '
+$fg[blue]$(virtualenv_info)$fg[red]$(python_info)%{$reset_color%}→ '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="[git:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="]$reset_color"
