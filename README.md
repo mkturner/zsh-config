@@ -1,6 +1,9 @@
 # zsh-config
 
 ![shell session screenshot](https://cloud.githubusercontent.com/assets/8616618/7666843/a02c2682-fbc1-11e4-9a91-a7adfbec27d4.png)
+
+![python version at prompt](https://cloud.githubusercontent.com/assets/8616618/7777526/e000cb12-0091-11e5-872d-f41f48f515f9.png)
+
 YMMV depending on your terminal and theme.
 I'm using iTerm2 with the ToyChest theme.
 
