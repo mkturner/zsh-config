@@ -103,6 +103,7 @@ export EDITOR='subl -w'
 alias gst='git status'
 alias ga='git add'
 alias gc='git commit'
+alias gca='git commit --amend'
 alias gcm='git commit -m'
 alias gco='git checkout'
 alias gpl='git pull'
@@ -161,6 +162,7 @@ function zshconfig() {
 
     subl -w $zshrc
     source $zshrc
+    cp $zshrc ~/git/zsh-config/
 }
 
 

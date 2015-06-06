@@ -71,7 +71,7 @@ function python_info() {
 
 
 PROMPT='
-$fg[cyan]$(get_host): $fg[yellow]$(get_pwd) %{$reset_color%}|| $(git_prompt_info) || $(battery_charge)
+$fg_bold[blue]$(get_host):%{$reset_color%} $fg[yellow]$(get_pwd) %{$reset_color%}|| $(git_prompt_info) || $(battery_charge)
 $fg[blue]$(virtualenv_info)$fg[red]$(python_info)%{$reset_color%}→ '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="[git:"
