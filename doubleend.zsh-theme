@@ -65,7 +65,7 @@ function virtualenv_info() {
 }
 
 function python_info() {
-  echo `python -c "import sys; print(sys.version[:5])"`' '
+  echo `python -c "import sys; print(sys.version.split(' ')[0])"`' '
 }
 
 
