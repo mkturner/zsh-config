@@ -47,7 +47,7 @@ ZSH_THEME="doubleend"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
-source ~/git/zsh-config/git-flow-completion.zsh
+# source ~/git/zsh-config/git-flow-completion.zsh
 
 # User configuration
 # export PATH=$HOME:/usr/local/bin:/bin:$PATH
