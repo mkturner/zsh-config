@@ -14,7 +14,7 @@ ZSH_THEME="doubleend"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-  export UPDATE_ZSH_DAYS=30
+  export UPDATE_ZSH_DAYS=14
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -46,33 +46,27 @@ ZSH_THEME="doubleend"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
-
 source $ZSH/oh-my-zsh.sh
+source ~/git/zsh-config/git-flow-completion.zsh
 
 # User configuration
+# export PATH=$HOME:/usr/local/bin:/bin:$PATH
+# export PATH=$HOME:/usr/local/git/bin:/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/bin:$PATH
 
-export PATH=$HOME:/usr/local/bin:/bin:$PATH
-
-export PATH=$HOME:/usr/local/git/bin:/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:$PATH
-
-# Setting PATH for Python 3.3
-# The orginal version is saved in .bash_profile.pysave
-# PATH="/Library/Frameworks/Python.framework/Versions/3.3/bin:${PATH}"
-export PATH
-
-# added by Anaconda3 2.0.1 installer
-#export PATH="/Users/marvin/anaconda/bin:$PATH"
-
-#Postgres addition
-export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+# #Postgres addition
+# export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 
 #Android SDK location
-export PATH="/Users/marvin/Library/Android/SDK/platform-tools:$PATH"
+#export PATH="/Users/marvin/Library/Android/SDK/platform-tools:$PATH"
 
 #PHP 5.6 location
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+#export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 
 export EDITOR='subl -w'
+
+# Cookiecutter Vars
+export DJ='https://github.com/pydanny/cookiecutter-django.git'
+export DJDRF='https://github.com/agconti/cookiecutter-django-rest.git'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -116,72 +110,113 @@ alias gb='git branch'
 alias gba='git branch -a'
 alias gbd='git branch -d'
 alias glg='git log --oneline --graph --decorate'
+alias gla='git log --oneline --graph --decorate --all'
 alias gls='git log --stat'
+alias grh='git reset --hard HEAD^'
 
 alias saf='open -a safari'
 alias chr='open -a chrome'
 alias fox='open -a firefox'
 alias opr='open -a opera'
-alias cdc='cd ~/Documents/Code'
+alias cdc='cd ~/Code'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias empty='rm -rf .Trash/*'
-alias fuck='$(thefuck $(fc -ln -1))'
+#alias fuck='$(thefuck $(fc -ln -1))'
 alias bye='exit'
 
 # python /django stuff
 alias py='python'
 alias py3='python3'
 
-alias djangover='python -c "from __future__ import print_function; import django; print(django.get_version())"'
+alias djver='python -c "import django; print(django.get_version())"'
 alias pyman='./manage.py'
 
+# utility aliases
+alias ytmp3='youtube-dl --extract-audio --audio-format mp3'
+alias canary='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary'
+
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+
 function mkcd () {
-	mkdir "$1" && cd "$1"
+	mkdir "$1" && cd "$1" || exit
 }
 
 function mkcg () {
-	mkdir "$1" && cd "$1" && git init
+	mkcd "$1"
+    git init
 }
 
 function browsers () {
-	lw=('saf' 'fox' 'opr')
+	lw=('saf' 'fox')
 
 	for i in $lw; do
-		$i $1
+		$i "$1"
 	done
 }
 
 function activate() {
     export VIRTUAL_ENV_DISABLE_PROMPT='1'
-    pyenv activate $1
+    pyenv activate "$1"
 }
 
 function zshconfig() {
     zshrc=~/.zshrc
 
-    subl -w $zshrc
+    code -w $zshrc
     source $zshrc
     cp $zshrc ~/git/zsh-config/
 }
 
+function igdu() {
+    ACC="$1"
+    PROF="$2"
+    instaloader --login=$ACC $PROF --stories --fast-update --tagged --igtv --highlights --no-captions --no-metadata-json
+}
+
+function igdl() {
+    ACC="$1"
+    PROF="$2"
+    instaloader --login=$ACC $PROF --stories --tagged --igtv --highlights --no-captions --no-metadata-json
+}
 
 #unalias run-help
 #autoload run-help
 #HELPDIR=/usr/local/share/zsh/help
 
+# export PATH=/usr/local/bin:$PATH
+export PATH=$HOME:/usr/local/git/bin:/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/bin:$PATH
 export PATH=/usr/local/bin:$PATH
+
+# Postgres App
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# put pyenv shims directory before /usr/local/bin
-export PYENV_ROOT=~/.pyenv
-export PATH=$PYENV_ROOT/shims:$PATH
-# Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin"
-# Add NVM "                  "
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+
+### Added by the Heroku Toolbelt
+# export PATH="/usr/local/heroku/bin:$PATH"
+
+# PYENV SETUP
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
 export VIRTUAL_ENV_DISABLE_PROMPT='1'
 
+
+# NODENV SETUP
+eval "$(nodenv init -)"
+
+# # put pyenv shims directory before /usr/local/bin
+# export PYENV_ROOT=$HOME/.pyenv
+# export PATH=$PYENV_ROOT/shims:$PATH
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/marvin/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+eval "$(starship init zsh)"
